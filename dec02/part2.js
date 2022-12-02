@@ -1,6 +1,6 @@
-const win = 'win'
-const draw = 'draw'
-const loss = 'loss'
+const win = 'X'
+const draw = 'Y'
+const loss = 'Z'
 
 const rock = {
   [win]: 2,
@@ -16,19 +16,6 @@ const scissors = {
   [win]: 1,
   [draw]: 3,
   [loss]: 2,
-}
-
-const mapResult = expectedResult => {
-  switch (expectedResult) {
-    case 'X':
-      return loss
-    case 'Y':
-      return draw
-    case 'Z':
-      return win
-    default:
-      console.error(`Invalid input mine=${expectedResult}`)
-  }
 }
 
 const mapYours = yours => {
@@ -49,8 +36,8 @@ const parseInput = data => {
     .split(/\n/)
     .map(line => line.split(' '))
     .map(game => {
-      const yours = mapYours(game[0])
-      const result = mapResult(game[1])
+      const [yoursKey, result] = game
+      const yours = mapYours(yoursKey)
       const mine = yours[result]
 
       return { yours, mine, result }
