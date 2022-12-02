@@ -1,5 +1,5 @@
 import { URL, fileURLToPath } from 'url'
-import { readInput } from "../utils/readInput.js"
+import { readInput } from '../utils/readInput.js'
 import { getMaxCalories } from './part1.js'
 import { getTop3MaxCalories } from './part2.js'
 
