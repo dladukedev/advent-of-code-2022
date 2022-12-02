@@ -1,6 +1,6 @@
-const win = 'X'
+const win = 'Z'
 const draw = 'Y'
-const loss = 'Z'
+const loss = 'X'
 
 const rock = {
   [win]: 2,
