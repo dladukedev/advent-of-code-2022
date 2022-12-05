@@ -64,7 +64,7 @@ const parseCommands = data =>
     }
   })
 
-const getCommandsAndStartState = (data, parser) => {
+const getCommandsAndStartState = parser => data => {
   const [startChunk, commandsChunk] = data.split(/\n\n/)
 
   const startState = parser(startChunk)
@@ -74,19 +74,26 @@ const getCommandsAndStartState = (data, parser) => {
   return { commands, startState }
 }
 
-const sortBoxes = moveSelector => (state, command) => {
-  const { count, target, destination } = command
+const getCommandsAndStartStateForPuzzle =
+  getCommandsAndStartState(parsePuzzleStart)
+const getCommandsAndStartStateForTest = getCommandsAndStartState(parseTestStart)
 
-  const targetColumn = state[target]
-  const move = moveSelector(targetColumn, count)
+const sortBoxes =
+  moveSelector =>
+  (state, { count, target, destination }) => {
+    const move = moveSelector(state[target], count)
 
-  return state.map((column, index) =>
-    index === target
-      ? column.slice(0, column.length - count)
-      : index === destination
-      ? [...column, ...move]
-      : column,
-  )
+    return state.map((column, index) =>
+      index === target
+        ? column.slice(0, column.length - count)
+        : index === destination
+        ? [...column, ...move]
+        : column,
+    )
+  }
+
+export {
+  getCommandsAndStartStateForPuzzle,
+  getCommandsAndStartStateForTest,
+  sortBoxes,
 }
-
-export { getCommandsAndStartState, parseTestStart, parsePuzzleStart, sortBoxes }

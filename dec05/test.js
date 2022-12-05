@@ -1,5 +1,5 @@
 import { solvePart1 } from './part1.js'
-import { parseTestStart } from './shared.js'
+import { getCommandsAndStartStateForTest } from './shared.js'
 import { solvePart2 } from './part2.js'
 
 const testInput = `    [D]    
@@ -13,9 +13,9 @@ move 2 from 2 to 1
 move 1 from 1 to 2`
 
 test('December 05 - Part 1', () => {
-  expect(solvePart1(testInput, parseTestStart)).toBe('CMZ')
+  expect(solvePart1(testInput, getCommandsAndStartStateForTest)).toBe('CMZ')
 })
 
 test('December 05 - Part 2', () => {
-  expect(solvePart2(testInput, parseTestStart)).toBe('MCD')
+  expect(solvePart2(testInput, getCommandsAndStartStateForTest)).toBe('MCD')
 })
