@@ -3,19 +3,9 @@ const calculatePriority = char =>
     ? char.charCodeAt(0) - 'A'.charCodeAt(0) + 27
     : char.charCodeAt(0) - 'a'.charCodeAt(0) + 1
 
-const findSharedItem = group => {
-  const [search, ...remaining] = group
-
-  const set = new Set()
-  search.split('').forEach(char => {
-    set.add(char)
+const findSharedItem = ([search, ...remaining]) =>
+  [...new Set(search.split(''))].find(key => {
+    return remaining.every(bag => bag.includes(key))
   })
-
-  for (const key of set.keys()) {
-    if (remaining.every(bag => bag.includes(key))) {
-      return key
-    }
-  }
-}
 
 export { calculatePriority, findSharedItem }
